@@ -17,6 +17,9 @@ namespace TestApp
             BuildWebHost(args).Run();
         }
 
+        // refer to this
+        // https://andrewlock.net/exploring-program-and-startup-in-asp-net-core-2-preview1-2/
+        // for all the things that CreateDefaultBuilder does for you
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()

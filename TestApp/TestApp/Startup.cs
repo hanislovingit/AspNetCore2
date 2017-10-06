@@ -17,7 +17,8 @@ namespace TestApp
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IHostingEnvironment hostingEnvironment, ILogger<Startup> logger, IConfiguration configuration)
+        // The IConfiguration object is now injected by default by the framework
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -34,7 +35,7 @@ namespace TestApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             /* **********************************************************
              * We can configure the http pipeline using Use, Run and Map.
@@ -43,9 +44,6 @@ namespace TestApp
              * Map - branches the pipeline
              * MapWhen - branches the pipeline based on the result of the given predicate
              ***********************************************************/
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
